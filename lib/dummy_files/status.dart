@@ -13,7 +13,7 @@ class _statusPageState extends State<statusPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -24,7 +24,7 @@ class _statusPageState extends State<statusPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Status Update',
                 style: TextStyle(
                   fontSize: 30,
@@ -32,9 +32,9 @@ class _statusPageState extends State<statusPage> {
                   color: Colors.white,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
@@ -43,7 +43,7 @@ class _statusPageState extends State<statusPage> {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 3,
                       blurRadius: 7,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
@@ -60,16 +60,16 @@ class _statusPageState extends State<statusPage> {
                       circularStrokeCap: CircularStrokeCap.round,
                       center: TweenAnimationBuilder(
                         tween: Tween<double>(begin: 0, end: 0.5),
-                        duration: Duration(seconds: 2),
+                        duration: const Duration(seconds: 2),
                         builder: (_, double value, __) {
                           return Text(
                             "${(value * 100).toInt()}%",
-                            style: TextStyle(fontSize: 50, color: Colors.black),
+                            style: const TextStyle(fontSize: 50, color: Colors.black),
                           );
                         },
                       ),
                     ),
-                    SizedBox(height: 20), // Add space below the indicator
+                    const SizedBox(height: 20), // Add space below the indicator
                     // ElevatedButton(
                     //   onPressed: () {
                     //     Navigator.push(

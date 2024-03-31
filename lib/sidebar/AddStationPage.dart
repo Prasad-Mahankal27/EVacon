@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'qrgenerator/qrscreenview.dart'; // Updated import path for QR code generator screen
+import '../stationpage/qrscreenview.dart'; // Updated import path for QR code generator screen
 
 class AddStationPage extends StatefulWidget {
   @override
@@ -40,12 +40,12 @@ class _AddStationPageState extends State<AddStationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Station'),
+        title: const Text('Add Station'),
         backgroundColor: Colors.green,
         centerTitle: true,
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -81,7 +81,7 @@ class _AddStationPageState extends State<AddStationPage> {
                           _ownerName = value;
                         },
                       ),
-                      SizedBox(height: 16.0),
+                      const SizedBox(height: 16.0),
                       TextFormField(
                         decoration: InputDecoration(
                           labelText: 'Address',
@@ -101,7 +101,7 @@ class _AddStationPageState extends State<AddStationPage> {
                           _address = value;
                         },
                       ),
-                      SizedBox(height: 16.0),
+                      const SizedBox(height: 16.0),
                       TextFormField(
                         decoration: InputDecoration(
                           labelText: 'Account Number (8 digits)',
@@ -125,7 +125,7 @@ class _AddStationPageState extends State<AddStationPage> {
                           _accountNumber = value;
                         },
                       ),
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       Container(
                         height: 300.0,
                         decoration: BoxDecoration(
@@ -133,7 +133,7 @@ class _AddStationPageState extends State<AddStationPage> {
                           color: Colors.grey[200],
                         ),
                         child: _stationImage == null
-                            ? Center(
+                            ? const Center(
                           child: Text(
                             'No image selected',
                             style: TextStyle(
@@ -147,24 +147,24 @@ class _AddStationPageState extends State<AddStationPage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: () {
                     _pickImage(ImageSource.gallery);
                   },
-                  child: Text('Select Image from Gallery'),
+                  child: const Text('Select Image from Gallery'),
                 ),
-                SizedBox(height: 8.0),
+                const SizedBox(height: 8.0),
                 ElevatedButton(
                   onPressed: () {
                     _pickImage(ImageSource.camera);
                   },
-                  child: Text('Take a Picture'),
+                  child: const Text('Take a Picture'),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: _addStation, // Call _addStation function
-                  child: Text('Add Station'),
+                  child: const Text('Add Station'),
                 ),
               ],
             ),

@@ -14,7 +14,10 @@ class MapScreen extends StatelessWidget {
         shadowColor: Colors.black,
         child: Column(
           children: [
-            GoogleMapContainer(),
+            Container(
+              height: 200,
+              width: 330,
+            ),
             Text("Long Press to open Map: ", style: TextStyle(letterSpacing: 2,color: Colors.red[900], fontSize: 10, fontWeight: FontWeight.bold),),
           ],
         ),

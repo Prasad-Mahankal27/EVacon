@@ -1,12 +1,13 @@
-// import 'package:evsathi/screens/featurePage/module/station.dart';
-import 'package:ev/dummy_files/booking_page.dart';
+import 'package:ev/explore/chargepointd.dart';
+import 'package:ev/explore/greenlotsd.dart';
+import 'package:ev/explore/teslad.dart';
 import 'package:ev/screens/upi.dart';
 import 'package:flutter/material.dart';
 
 class stationDetailPage extends StatefulWidget {
-  
+  final String type;
 
-  const stationDetailPage({Key? key, }) : super(key: key);
+  const stationDetailPage({Key? key, required this.type}) : super(key: key);
 
   @override
   State<stationDetailPage> createState() => _stationDetailPageState();
@@ -26,7 +27,7 @@ class _stationDetailPageState extends State<stationDetailPage> {
         foregroundColor: Colors.grey[900],
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.greenAccent, Colors.blueAccent],
             begin: Alignment.topCenter,
@@ -41,7 +42,7 @@ class _stationDetailPageState extends State<stationDetailPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: ListView(
                   children: [
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Center(
                       child: Container(
                         height: 200,
@@ -52,22 +53,22 @@ class _stationDetailPageState extends State<stationDetailPage> {
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 3,
                               blurRadius: 7,
-                              offset: Offset(0, 3),
+                              offset: const Offset(0, 3),
                             ),
                           ],
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Image.asset(
-                            'image1.jpg',
+                            'lib/assets/tata.jpg',
                             fit: BoxFit.cover,
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(12),
@@ -76,82 +77,17 @@ class _stationDetailPageState extends State<stationDetailPage> {
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 3,
                             blurRadius: 7,
-                            offset: Offset(0, 3),
+                            offset: const Offset(0, 3),
                           ),
                         ],
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.star,
-                                    color: Colors.yellow[800],
-                                  ),
-                                  SizedBox(width: 10),
-                                  Text(
-                                    '4.0',
-                                    style: TextStyle(
-                                      color: Colors.grey[600],
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Text(
-                                'Tata',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 8,
-                                  horizontal: 12,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: avail == 'Busy'
-                                      ? Colors.red
-                                      : Colors.greenAccent,
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Text(
-                                  avail,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 10),
-                          SizedBox(height: 20),
-                          Text(
-                            "Description",
-                            style: TextStyle(
-                              color: Colors.grey[900],
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            "Latitude: 28.6139 \n Longitude: 77.2090 \n Price per 15 min (in rupees): 50 \n Charge Type: DC \n Speed (kW): 50 \n Distance from Location (km): 2.5",
-                            style: TextStyle(
-                              color: Colors.grey[600],
-                              fontSize: 16,
-                              height: 1.5,
-                            ),
-                          ),
-                        ],
-                      ),
+                      child: widget.type == "cp"
+                          ? ChargePoint(availability: avail)
+                          : widget.type == "ts"
+                              ? Tesla(availability: avail)
+                             : widget.type == "gl"
+                              ? Greenlots(availability: avail)
+                              : Container(), // Add more conditions as needed
                     ),
                   ],
                 ),
@@ -159,12 +95,12 @@ class _stationDetailPageState extends State<stationDetailPage> {
             ),
             Container(
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.green, Colors.green],
+                gradient: const LinearGradient(
+                  colors: [Colors.lightGreen, Colors.lightGreenAccent],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(20),
                   topRight: Radius.circular(20),
                 ),
@@ -173,11 +109,11 @@ class _stationDetailPageState extends State<stationDetailPage> {
                     color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 3,
                     blurRadius: 5,
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
-              padding: EdgeInsets.all(25),
+              padding: const EdgeInsets.all(25),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -195,12 +131,12 @@ class _stationDetailPageState extends State<stationDetailPage> {
                     child: Material(
                       color: Colors.transparent,
                       child: InkWell(
-                         onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PhonePePayment()),
-            );
-          },
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const PhonePePayment()),
+                          );
+                        },
                         child: Container(
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
@@ -216,15 +152,15 @@ class _stationDetailPageState extends State<stationDetailPage> {
                                 color: Colors.grey.withOpacity(0.5),
                                 spreadRadius: 3,
                                 blurRadius: 5,
-                                offset: Offset(0, 3),
+                                offset: const Offset(0, 3),
                               ),
                             ],
                           ),
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                             horizontal: 20.0,
                             vertical: 10.0,
                           ),
-                          child: Text(
+                          child: const Text(
                             "Booking",
                             style: TextStyle(
                               color: Colors.white,
@@ -265,15 +201,15 @@ class _stationDetailPageState extends State<stationDetailPage> {
                                 color: Colors.grey.withOpacity(0.5),
                                 spreadRadius: 3,
                                 blurRadius: 5,
-                                offset: Offset(0, 3),
+                                offset: const Offset(0, 3),
                               ),
                             ],
                           ),
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                             horizontal: 20.0,
                             vertical: 10.0,
                           ),
-                          child: Text(
+                          child: const Text(
                             "Rating Page",
                             style: TextStyle(
                               color: Colors.white,

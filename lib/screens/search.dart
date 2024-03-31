@@ -1,4 +1,4 @@
-import 'package:ev/screens/modal_sheet_details.dart';
+import 'package:ev/repeating/modal_sheet_details.dart';
 import 'package:flutter/material.dart';
 
 class SearchStation extends StatelessWidget {

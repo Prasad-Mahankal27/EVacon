@@ -44,6 +44,10 @@ dependencies:
   crypto: ^3.0.3
   phonepe_payment_sdk: ^2.0.1
   percent_indicator: ^4.2.3
+  firebase_auth: ^4.18.0
+  cloud_firestore: ^4.15.10
+  firebase_core: ^2.27.2
+  firebase_storage: ^11.6.11
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +75,7 @@ flutter:
   assets:
     - lib/assets/images/mapsev.png
     - lib/assets/images/evcar.jpeg
+    - lib/assets/tata.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

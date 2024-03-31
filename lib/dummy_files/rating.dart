@@ -1,6 +1,12 @@
-
-import 'package:ev/stationpage/AddStationPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+final _firebase = FirebaseAuth.instance;
+// Get the currently authenticated user
+    User? user = FirebaseAuth.instance.currentUser;
+    // Use the user's email as the document ID
+    String userEmail = user!.email!;
 
 class FeedbackPage extends StatefulWidget {
   @override
@@ -11,6 +17,24 @@ class _FeedbackPageState extends State<FeedbackPage> {
   double _rating = 0;
   final TextEditingController _textController = TextEditingController();
   final TextEditingController _suggestionController = TextEditingController();
+
+  void submit(String feedbacku, String suggestion) async {
+  await FirebaseFirestore.instance
+      .collection(userEmail)
+      .doc('feedback') 
+      .set({
+    'feedback': feedbacku,
+    'suggestions': suggestion,
+  });
+  _showFeedbackSnackbar(context);
+  Navigator.pop(context);
+}
+
+void _showFeedbackSnackbar(BuildContext context) {
+  ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Thank you for your feedback!"))
+      );
+}
 
   bool _isDarkTheme = false;
 
@@ -24,8 +48,8 @@ class _FeedbackPageState extends State<FeedbackPage> {
         builder: (ctx, constraints) {
           return Scaffold(
             appBar: AppBar(
-              title: Text('Feedback', style: TextStyle(color: Colors.white)),
-              backgroundColor: Color(0xFF007bff),
+              title: const Text('Feedback', style: TextStyle(color: Colors.white)),
+              backgroundColor: const Color(0xFF007bff),
               actions: [
                 IconButton(
                   onPressed: () {
@@ -43,12 +67,12 @@ class _FeedbackPageState extends State<FeedbackPage> {
               //   //gradient: _isDarkTheme ? _linearGradientDark() : _spiralGradientLight(),
               // ),
               child: SingleChildScrollView(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Rate Our App', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: _isDarkTheme ? Colors.white : Colors.red)),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Center(
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
@@ -62,20 +86,22 @@ class _FeedbackPageState extends State<FeedbackPage> {
                               },
                               value: _rating,
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             Text(_rating > 0 && _rating <= 5 ? _feedback[(_rating - 1).toInt()] : 'Tap an emoji to rate', style: TextStyle(fontSize: 20, color: _isDarkTheme ? Colors.white : Colors.black)),
                           ],
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
-                    TextField(controller: _textController, decoration: InputDecoration(labelText: 'Your Feedback', border: OutlineInputBorder()), maxLines: 5),
-                    SizedBox(height: 20),
-                    TextField(controller: _suggestionController, decoration: InputDecoration(labelText: 'Your Suggestions', border: OutlineInputBorder()), maxLines: 5),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
+                    TextField(controller: _textController, decoration: const InputDecoration(labelText: 'Your Feedback', border: OutlineInputBorder()), maxLines: 5),
+                    const SizedBox(height: 20),
+                    TextField(controller: _suggestionController, decoration: const InputDecoration(labelText: 'Your Suggestions', border: OutlineInputBorder()), maxLines: 5),
+                    const SizedBox(height: 20),
                     ElevatedButton(
-                      child: Text('Submit Feedback'),
-                      onPressed: () => AddStationPage(),
+                      child: const Text('Submit Feedback'),
+                      onPressed: () {
+                          submit(_textController.text.toString(), _suggestionController.text.toString());
+                      } 
                     ),
                   ],
                 ),
@@ -92,7 +118,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
     print('Feedback: ${_textController.text}');
     print('Suggestions: ${_suggestionController.text}');
 
-    final snackBar = SnackBar(
+    const snackBar = SnackBar(
       content: Row(
         children: [
           Text('Thank you for your feedback'),
@@ -105,7 +131,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
   }
 
   Gradient _linearGradientDark() {
-    return LinearGradient(
+    return const LinearGradient(
       colors: [Color(0xFF13294b), Color(0xFF1a7ca8)],
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
@@ -113,7 +139,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
   }
 
   Gradient _spiralGradientLight() {
-    return RadialGradient(
+    return const RadialGradient(
       colors: [Color(0xFF89cff0), Color(0xFF007bff)],
       center: Alignment.center,
       radius: 1.5,
@@ -131,17 +157,17 @@ class EmojiRating extends StatelessWidget {
   Widget buildEmoji(int index) {
     switch (index.toInt()) {
       case 1:
-        return Text('😔', style: TextStyle(fontSize: 40));
+        return const Text('😔', style: TextStyle(fontSize: 40));
       case 2:
-        return Text('😕', style: TextStyle(fontSize: 40));
+        return const Text('😕', style: TextStyle(fontSize: 40));
       case 3:
-        return Text('🙂', style: TextStyle(fontSize: 40));
+        return const Text('🙂', style: TextStyle(fontSize: 40));
       case 4:
-        return Text('😄', style: TextStyle(fontSize: 40));
+        return const Text('😄', style: TextStyle(fontSize: 40));
       case 5:
-        return Text('😁', style: TextStyle(fontSize: 40));
+        return const Text('😁', style: TextStyle(fontSize: 40));
       default:
-        return Text('');
+        return const Text('');
     }
   }
 
