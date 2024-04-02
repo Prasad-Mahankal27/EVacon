@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'package:ev/stationpage/qrscreenview.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import '../stationpage/qrscreenview.dart';
 import '../stationpage/qrscreenview.dart'; // Updated import path for QR code generator screen
 
 class AddStationPage extends StatefulWidget {
@@ -14,6 +16,8 @@ class _AddStationPageState extends State<AddStationPage> {
   String? _address;
   String? _accountNumber;
   File? _stationImage;
+  bool _isACSelected = false;
+  bool _isDCSelected = false;
 
   Future<void> _pickImage(ImageSource source) async {
     final ImagePicker picker = ImagePicker();
@@ -41,7 +45,7 @@ class _AddStationPageState extends State<AddStationPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Station'),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.blue, // Custom color for app bar
         centerTitle: true,
       ),
       body: Container(
@@ -49,7 +53,7 @@ class _AddStationPageState extends State<AddStationPage> {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Colors.black, Colors.greenAccent],
+            colors: [Colors.white, Colors.blueAccent], // Custom gradient colors
           ),
         ),
         child: Padding(
@@ -143,6 +147,40 @@ class _AddStationPageState extends State<AddStationPage> {
                           ),
                         )
                             : Image.file(_stationImage!),
+                      ),
+                      const SizedBox(height: 16.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                _isACSelected = !_isACSelected;
+                              });
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: _isACSelected ? Colors.green : Colors.grey,
+                            ),
+                            child: Text(
+                              'AC',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                _isDCSelected = !_isDCSelected;
+                              });
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: _isDCSelected ? Colors.green : Colors.grey,
+                            ),
+                            child: Text(
+                              'DC',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

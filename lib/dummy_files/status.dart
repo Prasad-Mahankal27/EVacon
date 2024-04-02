@@ -1,19 +1,34 @@
+import 'dart:math'; // Import 'dart:math' for random number generation
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-class statusPage extends StatefulWidget {
-  const statusPage({Key? key}) : super(key: key);
+class StatusPage extends StatefulWidget {
+  const StatusPage({Key? key}) : super(key: key);
 
   @override
-  State<statusPage> createState() => _statusPageState();
+  State<StatusPage> createState() => _StatusPageState();
 }
 
-class _statusPageState extends State<statusPage> {
+class _StatusPageState extends State<StatusPage> {
+  double _randomValue = 0.5; // Default value
+
+  @override
+  void initState() {
+    super.initState();
+    _generateRandomValue();
+  }
+
+  void _generateRandomValue() {
+    setState(() {
+      _randomValue = Random().nextDouble(); // Generate random number between 0 and 1
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -24,17 +39,17 @@ class _statusPageState extends State<statusPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Status Update',
+              Text(
+                'Charging Update',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               Container(
-                padding: const EdgeInsets.all(20),
+                padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
@@ -43,7 +58,7 @@ class _statusPageState extends State<statusPage> {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 3,
                       blurRadius: 7,
-                      offset: const Offset(0, 3),
+                      offset: Offset(0, 3),
                     ),
                   ],
                 ),
@@ -54,41 +69,17 @@ class _statusPageState extends State<statusPage> {
                       animationDuration: 1000,
                       radius: 150,
                       lineWidth: 30,
-                      percent: 0.5,
+                      percent: _randomValue, // Use the random value here
                       progressColor: Colors.green,
                       backgroundColor: Colors.green.shade100,
                       circularStrokeCap: CircularStrokeCap.round,
-                      center: TweenAnimationBuilder(
-                        tween: Tween<double>(begin: 0, end: 0.5),
-                        duration: const Duration(seconds: 2),
-                        builder: (_, double value, __) {
-                          return Text(
-                            "${(value * 100).toInt()}%",
-                            style: const TextStyle(fontSize: 50, color: Colors.black),
-                          );
-                        },
+                      center: Text(
+                        "${(_randomValue * 100).toInt()}%", // Display the percentage
+                        style: TextStyle(fontSize: 50, color: Colors.black),
                       ),
                     ),
-                    const SizedBox(height: 20), // Add space below the indicator
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     Navigator.push(
-                    //       context,
-                    //       MaterialPageRoute(
-                    //           builder: (context) => bookingPage()),
-                    //     );
-                    //   },
-                    //   style: ElevatedButton.styleFrom(
-                    //     backgroundColor: Colors.blue,
-                    //     foregroundColor: Colors.white,
-                    //     padding:
-                    //         EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    //     shape: RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.circular(20),
-                    //     ),
-                    //   ),
-                    //   child: Text('Booking Page'),
-                    // ),
+                    SizedBox(height: 20), // Add space below the indicator
+
                   ],
                 ),
               ),

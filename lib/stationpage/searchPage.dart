@@ -3,10 +3,12 @@ import 'dart:math';
 import 'stationDetail.dart'; // Import the stationDetail.dart file
 
 void main() {
-  runApp(EVFeaturesPage());
+  runApp(const EVFeaturesPage());
 }
 
 class EVFeaturesPage extends StatefulWidget {
+  const EVFeaturesPage({super.key});
+
   @override
   _EVFeaturesPageState createState() => _EVFeaturesPageState();
 }
@@ -242,11 +244,11 @@ class _EVFeaturesPageState extends State<EVFeaturesPage> {
                         // Navigate to station detail page with station object
                         Navigator.push(context, MaterialPageRoute(
                           builder: (context) {
-                            if (stationName == 'Tesla Supercharger Network')
-                              return stationDetailPage(type: "ts");
-                              else if (stationName == 'Greenlots')
-                              return stationDetailPage(type: "gl");
-                            return stationDetailPage(type: "cp");
+                            if (stationName == 'Tesla Supercharger Network') {
+                              return const stationDetailPage(type: "ts");
+                            } else if (stationName == 'Greenlots') {
+                              return const stationDetailPage(type: "gl"); }
+                            return const stationDetailPage(type: "cp");
                       }));
                       },
                       child: const Text("Explore"),
@@ -267,7 +269,7 @@ class _EVFeaturesPageState extends State<EVFeaturesPage> {
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: const Text("Station is Busy"),
-                  content: Text(
+                  content: const Text(
                       "Do you want to wait for the estimated time or book in advance?"),
                   actions: [
                     TextButton(
@@ -304,7 +306,9 @@ class _EVFeaturesPageState extends State<EVFeaturesPage> {
             TextButton(
               onPressed: () {
                 print("Booking in advance for $stationName...");
-                Navigator.of(context).pop();
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                   return const stationDetailPage(type: "ts");               
+                },));
               },
               child: const Text("Book"),
             ),
@@ -346,4 +350,3 @@ class _EVFeaturesPageState extends State<EVFeaturesPage> {
     );
   }
 }
-
