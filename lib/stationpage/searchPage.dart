@@ -204,7 +204,7 @@ class _EVFeaturesPageState extends State<EVFeaturesPage> {
     return Card(
       color: _searchQuery.isNotEmpty &&
               stationName.toLowerCase().contains(_searchQuery.toLowerCase())
-          ? Colors.blueGrey[900]
+          ? Colors.white // Change background color to white when searched
           : null,
       child: ListTile(
         title: Row(
@@ -242,14 +242,15 @@ class _EVFeaturesPageState extends State<EVFeaturesPage> {
                       onPressed: () {
                         Navigator.of(context).pop();
                         // Navigate to station detail page with station object
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (context) {
-                            if (stationName == 'Tesla Supercharger Network') {
-                              return const stationDetailPage(type: "ts");
-                            } else if (stationName == 'Greenlots') {
-                              return const stationDetailPage(type: "gl"); }
-                            return const stationDetailPage(type: "cp");
-                      }));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          if (stationName == 'Tesla Supercharger Network') {
+                            return const stationDetailPage(type: "ts");
+                          } else if (stationName == 'Greenlots') {
+                            return const stationDetailPage(type: "gl");
+                          }
+                          return const stationDetailPage(type: "cp");
+                        }));
                       },
                       child: const Text("Explore"),
                     ),
@@ -306,9 +307,11 @@ class _EVFeaturesPageState extends State<EVFeaturesPage> {
             TextButton(
               onPressed: () {
                 print("Booking in advance for $stationName...");
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                   return const stationDetailPage(type: "ts");               
-                },));
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return const stationDetailPage(type: "ts");
+                  },
+                ));
               },
               child: const Text("Book"),
             ),

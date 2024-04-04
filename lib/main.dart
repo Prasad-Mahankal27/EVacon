@@ -1,4 +1,5 @@
 import 'package:ev/auth/checkuser.dart';
+import 'package:ev/screens/support.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +12,8 @@ void main() async {
   );
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
-  home: Scaffold(
-    body:
-     CheckUser(),
-    ),));
+    home: Scaffold(
+      body: CheckUser(),
+    ),
+  ));
 }
-

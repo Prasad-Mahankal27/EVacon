@@ -53,6 +53,12 @@ class _HomeEvState extends State<HomeEv> {
     userEmail = user!.email!;
   }
 
+  void handleLogoTap(String searchTerm) {
+    // Handle the tap action here
+    print('Logo tapped with search term: $searchTerm');
+    // You can perform any action you want here, such as updating the UI or navigating to a new screen
+  }
+
   Future<String?> getImageUrl(String userEmail) async {
     try {
       // Check if the image exists for the user in Firebase Storage
@@ -133,9 +139,11 @@ class _HomeEvState extends State<HomeEv> {
               // showModalBottomSheet(context: context, builder: (context) {
               //   return SearchStation();
               // },);
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return EVFeaturesPage();
-              },));
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return EVFeaturesPage();
+                },
+              ));
             },
           ),
         ],
@@ -168,51 +176,69 @@ class _HomeEvState extends State<HomeEv> {
               leading: const Icon(Icons.book_outlined),
               title: const Text("Your Profile"),
               onTap: () => {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return show_profile();
-                },))
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return show_profile();
+                  },
+                ))
               }, // Add your onTap functionality here
             ),
             ListTile(
               leading: const Icon(Icons.edit),
               title: const Text("Edit Profile"),
               onTap: () => {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return ProfileInputForm();
-                },))
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return ProfileInputForm();
+                  },
+                ))
               }, // Add your onTap functionality here
             ),
             ListTile(
               leading: const Icon(Icons.ev_station),
               title: const Text("Add Station"),
               onTap: () => {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return AddStationPage();
-                },))
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return AddStationPage();
+                  },
+                ))
               }, // Add your onTap functionality here
             ),
             ListTile(
               leading: const Icon(Icons.car_rental_outlined),
               title: const Text("Add/Update Vehicle"),
               onTap: () => {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return VehicleForm();
-                },))
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return VehicleForm();
+                  },
+                ))
               }, // Add your onTap functionality here
             ),
             ListTile(
               leading: const Icon(Icons.car_rental_outlined),
               title: const Text("My Vehicle"),
               onTap: () => {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const displayVehicle();
-                },))
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return const displayVehicle();
+                  },
+                ))
               }, // Add your onTap functionality here
             ),
-            const SizedBox(height: 30,),
+            const SizedBox(
+              height: 30,
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: ElevatedButton.icon(onPressed: (){logout(context);}, icon: const Icon(Icons.logout), label: const Text("Logout"),),
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  logout(context);
+                },
+                icon: const Icon(Icons.logout),
+                label: const Text("Logout"),
+              ),
             ),
           ],
         ),
@@ -227,6 +253,7 @@ class _HomeEvState extends State<HomeEv> {
               children: [
                 MidScreen(),
                 SizedBox(height: 5),
+                // ignore: avoid_types_as_parameter_names
                 MidScreenAvatar(),
                 SizedBox(height: 5),
                 MapScreen(),
@@ -240,7 +267,8 @@ class _HomeEvState extends State<HomeEv> {
         unselectedItemColor: Colors.blue,
         iconSize: 24,
 
-        onTap: (int index) => _navigateToPage(context, index), // Use new navigation function
+        onTap: (int index) =>
+            _navigateToPage(context, index), // Use new navigation function
         currentIndex: 0,
         items: const [
           BottomNavigationBarItem(
@@ -252,7 +280,11 @@ class _HomeEvState extends State<HomeEv> {
             label: 'Status',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.qr_code_2, size: 47, color: Colors.green,),
+            icon: Icon(
+              Icons.qr_code_2,
+              size: 47,
+              color: Colors.green,
+            ),
             label: 'QR',
           ),
           BottomNavigationBarItem(
